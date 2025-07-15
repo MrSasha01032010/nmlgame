@@ -18,6 +18,7 @@
         }
 
         body {
+            /* background: linear-gradient(to right, #d39728, #b9b46b); */
             background: linear-gradient(to right, #1D143A, #2C1C54);
         }
         
@@ -26,8 +27,36 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        .game {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 3rem 1.5rem;
             gap: 2rem;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .shop {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            gap: 2rem;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .settings {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            gap: 2rem;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .game-title {
@@ -60,7 +89,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.6rem;
         }
 
         #coins-balance {
@@ -170,7 +199,7 @@
             width: 20rem;
             height: 14rem;
             border-radius: 1rem;
-            background-color: white;
+            background-color: rgb(255, 185, 185);
             padding: 1rem 2.2rem;
         }
 
@@ -209,7 +238,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            gap: 3rem;
+            gap: 1rem;
         }
 
         @keyframes breathing {
@@ -281,28 +310,106 @@
                 font-size: 12px;
             }
         }
+
+        header {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6rem;
+            background: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .header-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: scale 0.2s ease-in-out;
+        }
+
+        .header-column:hover {
+            scale: 1.15;
+        }
+
+        .header-column p {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <div class="header-column">
+            <i class="fa-solid fa-gamepad game-button" style="color: #ffffff; font-size: 1.8rem;"></i>
+            <p class="game-button">Game</p>
+        </div>
+
+        <div class="header-column">
+            <i class="fa-solid fa-cart-shopping shop-button" style="color: #ffffff; font-size: 1.8rem;"></i>
+            <p class="shop-button">Shop</p>
+        </div>
+
+        <div class="header-column">
+            <i class="fa-solid fa-gear settings-button" style="color: #ffffff; font-size: 1.8rem;"></i>
+            <p class="settings-button">Settings</p>
+        </div>
+    </header>
     <main>
-        <h3 class="game-title">NML GAME</h3>
-        <div class="balance-block">
-            <h5>BALANCE</h5>
-            <div class="coins">
-                <i class="fa-solid fa-bitcoin-sign" style="color: #FFD43B; font-size: 1.7rem;"></i>
-                <p id="coins-balance">0</p>
+        <div class="game" id="gamepage">
+            <h3 class="game-title">NML GAME</h3>
+            <div class="balance-block">
+                <h5>BALANCE</h5>
+                <div class="coins">
+                    <i class="fa-solid fa-sack-dollar" style="color: #FFD43B; font-size: 1.6rem;"></i>
+                    <p id="coins-balance">0</p>
+                </div>
+            </div>
+            <div class="clicker-block breathing">
+                <i class="fa-solid fa-computer-mouse fa-6x" style="color: white;"></i>
+            </div>
+            <div class="clicks-block">
+                <h5>CLICKS</h5>
+                <p id="clicks-balance">0</p>
+            </div>
+            <div class="exchange-block">
+                <button id="exchange-button">EXCHANGE</button>
+                <p>10 clicks = 1 coin</p>
             </div>
         </div>
-        <div class="clicker-block breathing">
-            <i class="fa-solid fa-computer-mouse fa-6x" style="color: white;"></i>
+
+        <div class="shop" id="shoppage">
+            <h3 class="game-title">SHOP</h3>
+            <div class="balance-block">
+                <h5>BALANCE</h5>
+                <div class="coins">
+                    <i class="fa-solid fa-sack-dollar" style="color: #FFD43B; font-size: 1.6rem;"></i>
+                    <p id="coins-balance">0</p>
+                </div>
+            </div>
         </div>
-        <div class="clicks-block">
-            <h5>CLICKS</h5>
-            <p id="clicks-balance">0</p>
-        </div>
-        <div class="exchange-block">
-            <button id="exchange-button">EXCHANGE</button>
-            <p>10 clicks = 1 coin</p>
+
+        <div class="settings" id="settingspage">
+            <h3 class="game-title">Settings</h3>
+            <div class="balance-block">
+                <h5>BALANCE</h5>
+                <div class="coins">
+                    <i class="fa-solid fa-sack-dollar" style="color: #FFD43B; font-size: 1.6rem;"></i>
+                    <p id="coins-balance">0</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -329,6 +436,12 @@
         const clicksBalance = document.getElementById('clicks-balance');
         const coinsBalance = document.getElementById("coins-balance");
         const exchangeButton = document.getElementById("exchange-button");
+        const gameButton = document.querySelectorAll('.game-button');
+        const gamepage = document.getElementById("gamepage");
+        const shopButton = document.querySelectorAll('.shop-button');
+        const shoppage = document.getElementById("shoppage");
+        const settingsButton = document.querySelectorAll('.settings-button');
+        const settingspage = document.getElementById("settingspage");
 
         clicksBalance.textContent = clicks;
         coinsBalance.textContent = coins;
@@ -369,6 +482,45 @@
                     coinsBalance.style.animation = '';
                 });
             }
+        });
+
+        gameButton.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                shoppage.style.display = "none";
+                settingspage.style.display = "none";
+                gamepage.style.display = "flex";
+                gamepage.style.opacity = "0";
+
+                setTimeout(function() {
+                    gamepage.style.opacity = "1";
+                }, 100);
+            });
+        });
+
+        shopButton.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                gamepage.style.display = "none";
+                settingspage.style.display = "none";
+                shoppage.style.display = "flex";
+                shoppage.style.opacity = "0";
+
+                setTimeout(function() {
+                    shoppage.style.opacity = "1";
+                }, 100);
+            });
+        });
+
+        settingsButton.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                gamepage.style.display = "none";
+                shoppage.style.display = "none";
+                settingspage.style.display = "flex";
+                settingspage.style.opacity = "0";
+
+                setTimeout(function() {
+                    settingspage.style.opacity = "1";
+                }, 100);
+            });
         });
     </script>
 </body>
