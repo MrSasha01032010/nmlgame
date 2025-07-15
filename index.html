@@ -146,6 +146,72 @@
             scale: 1.15;
         }
 
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            width: 20rem;
+            height: 14rem;
+            border-radius: 1rem;
+            background-color: white;
+            padding: 1rem 2.2rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .close-btn i {
+            font-size: 1.4rem;
+            color: #000000;
+        }
+
+        .info-panel h1 {
+            font-family: "Play", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .info-panel p {
+            font-family: "Play", sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 3rem;
+        }
+
         @keyframes breathing {
             0% {
                 transform: scale(1);
@@ -200,19 +266,19 @@
 
         @media (max-width: 1920px) {
             html {
-                font-size: 14px;
+                font-size: 15px;
             }
         }
 
         @media (max-width: 1280px) {
             html {
-                font-size: 12px;
+                font-size: 14px;
             }
         }
 
         @media (max-width: 720px) {
             html {
-                font-size: 16px;
+                font-size: 12px;
             }
         }
     </style>
@@ -240,6 +306,18 @@
         </div>
     </main>
 
+    <div class="modal">
+        <div class="info-panel">
+            <div class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="info">
+                <h1>ПРЕДУПРЕЖДЕНИЕ!</h1>
+                <p>Данная игра находиться в РАЗРАБОТКЕ! Если вы находите ошибки сообщайте администрации по данной почте: sasho.mykh@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         let clicks = 0;
         let coins = 0;
@@ -254,6 +332,13 @@
 
         clicksBalance.textContent = clicks;
         coinsBalance.textContent = coins;
+
+        const closeBtn = document.querySelector('.close-btn');
+        const modal = document.querySelector('.modal');
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
 
         clickerBlock.addEventListener('click', () => {
             clicks++;
