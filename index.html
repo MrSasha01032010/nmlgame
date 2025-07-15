@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NML Clicker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            background: linear-gradient(to right, #1D143A, #2C1C54);
+        }
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            gap: 2rem;
+        }
+
+        .game-title {
+            font-family: "Play", sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #74DBFF;
+        }
+
+        .balance-block {
+            display: flex;
+            flex-direction: column;
+            width: 18rem;
+            height: 8rem;
+            border-radius: 1rem;
+            background-color: #231B47;
+            border: 5px solid #352968;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .balance-block h5 {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: #B19EFF;
+        }
+
+        .coins {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        #coins-balance {
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #FFFFFF;
+        }
+
+        .clicker-block {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 14rem;
+            height: 14rem;
+            background-color: #231C4B;
+            border: 1rem solid #6FDBFF;
+            border-radius: 100%;
+        }
+
+        .clicker-block.breathing:hover {
+            animation: breathing 2s infinite;
+        }
+
+        .clicker-block.clicked {
+            animation: click 0.3s;
+        }
+
+        .clicks-block {
+            display: flex;
+            flex-direction: column;
+            width: 18rem;
+            height: 8rem;
+            border-radius: 1rem;
+            background-color: #231B47;
+            border: 5px solid #352968;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clicks-block h5 {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: #B19EFF;
+        }
+
+        #clicks-balance {
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #FFFFFF;
+        }
+
+        .exchange-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .exchange-block p {
+            font-family: "Poppins", sans-serif;
+            font-size: 1rem;
+            color: #b3b3b3;
+        }
+
+        #exchange-button {
+            width: 14rem;
+            height: 4rem;
+            border-radius: 2rem;
+            background-color: #945EEA;
+            border: 0;
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            transition: scale 0.3s ease-in-out;
+        }
+        
+        #exchange-button:hover {
+            scale: 1.15;
+        }
+
+        @keyframes breathing {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes click {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes coinFlash {
+            0% {
+                color: #FFD43B;
+                transform: scale(1);
+            }
+            50% {
+                color: #FFFFFF;
+                transform: scale(1.2);
+            }
+            100% {
+                color: #FFD43B;
+                transform: scale(1);
+            }
+        }
+
+
+        @media (max-width: 2650px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 1920px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            html {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            html {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h3 class="game-title">NML GAME</h3>
+        <div class="balance-block">
+            <h5>BALANCE</h5>
+            <div class="coins">
+                <i class="fa-solid fa-bitcoin-sign" style="color: #FFD43B; font-size: 1.7rem;"></i>
+                <p id="coins-balance">0</p>
+            </div>
+        </div>
+        <div class="clicker-block breathing">
+            <i class="fa-solid fa-computer-mouse fa-6x" style="color: white;"></i>
+        </div>
+        <div class="clicks-block">
+            <h5>CLICKS</h5>
+            <p id="clicks-balance">0</p>
+        </div>
+        <div class="exchange-block">
+            <button id="exchange-button">EXCHANGE</button>
+            <p>10 clicks = 1 coin</p>
+        </div>
+    </main>
+
+    <script>
+        let clicks = 0;
+        let coins = 0;
+
+        clicks = Number(localStorage.getItem('clicks')) || 0;
+        coins = Number(localStorage.getItem('coins')) || 0;
+
+        const clickerBlock = document.querySelector('.clicker-block');
+        const clicksBalance = document.getElementById('clicks-balance');
+        const coinsBalance = document.getElementById("coins-balance");
+        const exchangeButton = document.getElementById("exchange-button");
+
+        clicksBalance.textContent = clicks;
+        coinsBalance.textContent = coins;
+
+        clickerBlock.addEventListener('click', () => {
+            clicks++;
+            clicksBalance.textContent = clicks;
+
+            localStorage.setItem('clicks', clicks);
+
+            clickerBlock.classList.remove('breathing');
+
+            clickerBlock.classList.add('clicked');
+
+            setTimeout(() => {
+            clickerBlock.classList.remove('clicked');
+            clickerBlock.classList.add('breathing');
+            }, 200);
+        });
+
+        exchangeButton.addEventListener("click", function() {
+            if (clicks >= 10) {
+                coins++;
+                clicks -= 10;
+                coinsBalance.textContent = coins;
+                clicksBalance.textContent = clicks;
+                localStorage.setItem('clicks', clicks);
+                localStorage.setItem('coins', coins);
+                coinsBalance.style.animation = 'coinFlash 0.5s';
+                coinsBalance.addEventListener('animationend', () => {
+                    coinsBalance.style.animation = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
